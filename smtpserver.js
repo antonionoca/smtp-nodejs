@@ -1,4 +1,4 @@
-const http = require('http');
+const net = require('net');
 
 /**
 * Instance of SmtpServer
@@ -8,11 +8,16 @@ class SmtpServer {
   * @param {port} port to listen to.
   */
   start(port = 8025) {
-    http.createServer(function(request, response) {
-      response.writeHead(200, {'Content-Type': 'text/plain'});
-      response.end('Hello world');
-    }).listen(port);
-    console.log(`Server running at http://127.0.0.1:${port}`);
+    net.createServer((c) => {
+      console.log('client connected');
+      c.on('end', () => {
+        console.log('client disconnected');
+      });
+      c.write('hello world\r\n');
+      c.pipe(c);
+    }).listen(port, () => {
+      console.log(`Server bound at port ${port}`);
+    });
   }
 }
 
