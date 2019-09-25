@@ -4,7 +4,7 @@
   "description": "",
   "main": "smtpserver.js",
   "scripts": {
-    "dev": "npm run lint && nodemon smtpserver.js",
+    "dev": "nodemon smtpserver.js",
     "lint": "eslint *.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
