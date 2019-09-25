@@ -30,7 +30,6 @@ TODO
 
 ## TODO
 
-- Add eslint for ecmascript 8
 - Write core logic
 - Add tests
 - Develop frontend using react/redux
