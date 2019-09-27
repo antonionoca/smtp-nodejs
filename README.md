@@ -30,6 +30,11 @@ Test application available on client/
 
 ## TODO
 
-- Write core logic
-- Add tests
-- Develop frontend using react/redux
+- Capture email using client application
+- Parse the telnet content into an email object
+- Add automated tests
+- Frontend using React/Redux
+  - get messages
+  - get single message
+  - delete messages
+  - show message details 
