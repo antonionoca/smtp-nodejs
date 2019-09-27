@@ -26,7 +26,7 @@ npm run dev
 
 ## Tests
 
-TODO
+Test application available on client/
 
 ## TODO
 
