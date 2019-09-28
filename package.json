@@ -4,7 +4,7 @@
   "description": "",
   "main": "smtpserver.js",
   "scripts": {
-    "dev": "nodemon smtpserver.js",
+    "dev": "nodemon -r esm smtpserver.js",
     "lint": "eslint *.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -15,5 +15,8 @@
     "eslint": "^6.4.0",
     "eslint-config-google": "^0.14.0",
     "nodemon": "^1.19.2"
+  },
+  "dependencies": {
+    "esm": "^3.2.25"
   }
 }

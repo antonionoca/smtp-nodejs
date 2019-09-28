@@ -1,7 +1,7 @@
 var nodemailer = require('nodemailer');
 var transport = nodemailer.createTransport({
   host: "localhost",
-  port: 1025
+  port: 8125
 });
 
 var mailOptions = {

@@ -1,3 +1,5 @@
+import Handler from './handler.js';
+
 const net = require('net');
 
 /**
@@ -6,25 +8,21 @@ const net = require('net');
 class SmtpServer {
   /**
   * @param {messages} messages stored by the fake smtp server
+  * @param {handler} handler of connection events
   */
-  constructor(messages) {
+  constructor(messages, handler) {
     this.messages = messages || [];
+    this.handler = handler || new Handler();
   }
 
   /**
   * @param {port} port to listen to.
   */
-  start(port = 8025) {
+  start(port = 8125) {
     net.createServer((c) => {
       console.log('client connected');
-      c.on('data', (data) => {
-        const msg = data.toString();
-        this.messages.push(msg);
-        console.log(msg);
-      });
-      c.on('end', () => {
-        console.log('client disconnected');
-      });
+      c.on('data', (data) => this.handler.onData(data));
+      c.on('end', () => this.handler.onClientEnd());
       c.write('server response');
       c.pipe(c);
     }).listen(port, () => {
@@ -42,7 +40,3 @@ class SmtpServer {
 
 const server = new SmtpServer();
 server.start();
-
-setInterval(function() {
-  console.log(JSON.stringify(server.getMessages()));
-}, 3000);
