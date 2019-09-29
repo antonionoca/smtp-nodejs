@@ -1,6 +1,5 @@
-import Handler from './handler.js';
-
 const net = require('net');
+const Handler = require('./handler.js');
 
 /**
 * Instance of SmtpServer

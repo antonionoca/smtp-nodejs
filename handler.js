@@ -1,7 +1,7 @@
 /**
 * Connection handler.
 */
-export default class Handler {
+module.exports = class Handler {
   /**
   * Handle data transmission event
   * @param {data} data transmitted by the client
