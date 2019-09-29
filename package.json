@@ -16,5 +16,7 @@
     "eslint-config-google": "^0.14.0",
     "nodemon": "^1.19.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "smtp-server": "^3.5.0"
+  }
 }

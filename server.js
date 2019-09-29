@@ -1,41 +1,40 @@
-const net = require('net');
-const Handler = require('./handler.js');
+const SmtpServer = require('smtp-server').SMTPServer;
 
-/**
-* Instance of SmtpServer
-*/
-class SmtpServer {
-  /**
-  * @param {messages} messages stored by the fake smtp server
-  * @param {handler} handler of connection events
-  */
-  constructor(messages, handler) {
+class Server {
+  constructor(messages) {
     this.messages = messages || [];
-    this.handler = handler || new Handler();
   }
-
-  /**
-  * @param {port} port to listen to.
-  */
-  start(port = 8125) {
-    net.createServer((c) => {
-      console.log('client connected');
-      c.on('data', (data) => this.handler.onData(data));
-      c.on('end', () => this.handler.onClientEnd());
-      c.write('server response');
-      c.pipe(c);
-    }).listen(port, () => {
-      console.log(`Server bound at port ${port}`);
+  start() {
+    const server = new SmtpServer({
+      onAuth(auth, session, callback) {
+        console.log("onAuth %s, Session %s", auth, session);
+        callback();
+      },
+      onConnect(session, callback) {
+        console.log("Connected Session %s", session);
+        callback();
+      },
+      onClose(session) {
+        console.log("Closing session %s", session);
+      },
+      onMailFrom(address, session, callback) {
+        this.messages.push(address);
+        console.log(this.messages);
+        callback();
+      },
+      onData(stream, session, callback) {
+        stream.pipe(process.stdout);
+        stream.on("end", callback);
+      }
     });
-  }
-  /**
-  * Get captured email messages
-  * @return messages array
-  */
-  getMessages() {
-    return this.messages;
+
+    server.on('error', err => {
+      console.log("Error %s", err.message);
+    });
+
+    server.listen(8125);
   }
 }
 
-const server = new SmtpServer();
-server.start();
+const smtpServer = new Server();
+smtpServer.start();
