@@ -30,9 +30,7 @@ Test application available on client/
 
 ## TODO
 
-- Capture email using client application
-- Parse the telnet content into an email object
-- Add automated tests
+- Clone MailHog using NodeMailer
 - Frontend using React/Redux
   - get messages
   - get single message
