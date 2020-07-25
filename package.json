@@ -12,11 +12,11 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "eslint": "^6.4.0",
+    "eslint": "^7.5.0",
     "eslint-config-google": "^0.14.0",
-    "nodemon": "^1.19.2"
+    "nodemon": "^2.0.4"
   },
   "dependencies": {
-    "smtp-server": "^3.5.0"
+    "smtp-server": "^3.7.0"
   }
 }
